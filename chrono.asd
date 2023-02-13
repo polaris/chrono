@@ -6,6 +6,8 @@
   :license  "Specify license here"
   :version "0.0.1"
   :serial t
-  :depends-on (#:chronicity)
+  :depends-on (#:adopt
+               #:chronicity
+               #:with-user-abort)
   :components ((:file "package")
                (:file "chrono")))

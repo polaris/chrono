@@ -1,4 +1,7 @@
 ;;;; package.lisp
 
 (defpackage #:chrono
-  (:use #:cl))
+  (:use #:cl
+        #:chronicity)
+  (:export :toplevel
+           *ui*))
