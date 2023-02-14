@@ -15,13 +15,13 @@
   (:report "A foo is required, but none was supplied."))
 
 ;;;; Functionality -----------------------------------------------
-(defun foo (string)
+(defun handle-input-string (string)
   (let ((time (chronicity:parse string)))
     (format t "~d~%" (local-time:format-timestring nil time :format local-time:+rfc-1123-format+))))
 
 ;;;; Run ---------------------------------------------------------
 (defun run (arguments)
-  (map nil #'foo arguments))
+  (map nil #'handle-input-string arguments))
 
 ;;;; User Interface ----------------------------------------------
 (defmacro exit-on-ctrl-c (&body body)
