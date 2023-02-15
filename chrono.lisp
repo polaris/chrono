@@ -14,10 +14,19 @@
 (define-condition missing-foo (user-error) ()
   (:report "A foo is required, but none was supplied."))
 
+(define-condition invalid-input-string (user-error)
+  ((input-string
+    :initarg :input-string
+    :reader get-input-string))
+  (:report (lambda (condition stream)
+	     (format stream "Invalid input string: ~d." (get-input-string condition)))))
+
 ;;;; Functionality -----------------------------------------------
 (defun handle-input-string (string)
   (let ((time (chronicity:parse string)))
-    (format t "~d~%" (local-time:format-timestring nil time :format local-time:+rfc-1123-format+))))
+    (if (not (null time))
+	(format t "~d~%" (local-time:format-timestring nil time :format local-time:+rfc-1123-format+))
+	(error (make-condition 'invalid-input-string :input-string string)))))
 
 ;;;; Run ---------------------------------------------------------
 (defun run (arguments)
